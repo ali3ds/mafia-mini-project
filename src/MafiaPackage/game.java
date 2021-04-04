@@ -86,6 +86,11 @@ public class game {
 			silencers_count++;
 			break;
 
+		case "informer":
+			Informer = new informer(name);
+			informers_count++;
+			break;
+
 		}
 	}
 
@@ -136,6 +141,8 @@ public class game {
 				System.out.println(bulletproofs[i].name + ": " + "bulletproof");
 			for (int i = 0; i < joker_count; i++)
 				System.out.println(joker.name + ": " + "Joker");
+			for (int i = 0; i < informers_count; i++)
+				System.out.println(Informer.name + ": " + "informer");
 			for (int i = 0; i < mafias_count; i++)
 				System.out.println(mafias[i].name + ": " + "mafia");
 			for (int i = 0; i < godfathers_count; i++)
@@ -185,6 +192,15 @@ public class game {
 		for (int i = 0; i < joker_count; i++)
 			if (joker.name.equals(name)) {
 				if (joker.isSilenced)
+					return true;
+				else {
+					return false;
+				}
+			}
+
+		for (int i = 0; i < informers_count; i++)
+			if (Informer.name.equals(name)) {
+				if (Informer.isSilenced)
 					return true;
 				else {
 					return false;
@@ -259,6 +275,15 @@ public class game {
 				}
 			}
 
+		for (int i = 0; i < informers_count; i++)
+			if (Informer.name.equals(name)) {
+				if (Informer.isAlive)
+					return true;
+				else {
+					return false;
+				}
+			}
+
 		for (int i = 0; i < mafias_count; i++)
 			if (mafias[i].name.equals(name)) {
 				if (mafias[i].isAlive)
@@ -317,6 +342,11 @@ public class game {
 				return joker;
 			}
 
+		for (int i = 0; i < informers_count; i++)
+			if (Informer.name.equals(name)) {
+				return Informer;
+			}
+
 		for (int i = 0; i < mafias_count; i++)
 			if (mafias[i].name.equals(name)) {
 				return mafias[i];
@@ -354,6 +384,8 @@ public class game {
 			godfathers[i].resetVotes();
 		for (int i = 0; i < silencers_count; i++)
 			silencers[i].resetVotes();
+		for (int i = 0; i < informers_count; i++)
+			Informer.resetVotes();
 
 	}
 
@@ -412,6 +444,12 @@ public class game {
 		for (int i = 0; i < joker_count; i++)
 			if (joker.name.equals(name)) {
 				joker.isSilenced = true;
+				return;
+			}
+
+		for (int i = 0; i < informers_count; i++)
+			if (Informer.name.equals(name)) {
+				Informer.isSilenced = true;
 				return;
 			}
 
@@ -582,10 +620,17 @@ public class game {
 				if (!doctors_target.equals(name)) {
 					Informer.isAlive = false;
 					System.out.println(Informer.name + " was killed");
+					inform();
 					return;
 				}
 			}
 
+	}
+
+	public static void inform() {
+		
+
+		
 	}
 
 	public static void checkIfGameEnds() {
