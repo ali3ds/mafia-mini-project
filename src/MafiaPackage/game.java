@@ -2,12 +2,13 @@ package MafiaPackage;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Random;
 
 public class game {
 
 	public static Scanner input = new Scanner(System.in);
 	public static int playersCount;
-	public static String roles = "Joker villager detective doctor bulletproof mafia godfather silencer ";
+	public static String roles = "Joker villager detective doctor bulletproof mafia godfather silencer informer ";
 
 	static villager[] villagers = new villager[500];
 	static int villagers_count;
@@ -628,14 +629,27 @@ public class game {
 	}
 
 	public static void inform() {
+		Random rand = new Random();
 		
-
-		
+		while(true) {
+			int random = rand.nextInt(3);
+			if(random==0) {
+				Informer.inform(mafias,mafias_count);break;}
+				else if(random==1) {
+				Informer.inform(getCount(mafias,mafias_count));break;}
+				else {
+				if(joker_count<1) {
+					continue;
+					}else {
+				Informer.inform(joker);break;}
+				}
+		}
 	}
 
 	public static void checkIfGameEnds() {
 		int v=getCount(villagers,villagers_count)+getCount(doctors,doctors_count)+getCount(detectives,detectives_count)+getCount(bulletproofs,bulletproofs_count);
 		if(informers_count>0)v++;
+		
 		 int m = getCount(mafias,mafias_count)+getCount(godfathers,godfathers_count)+getCount(silencers,silencers_count);
 		 
 		 if(m>=v) {
