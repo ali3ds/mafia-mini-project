@@ -25,6 +25,9 @@ public class game {
 	static int godfathers_count;
 	static silencer[] silencers = new silencer[500];
 	static int silencers_count;
+	
+	static informer Informer;
+	static int informers_count;
 
 	static boolean EveryOneHasRole = false;
 
@@ -573,11 +576,21 @@ public class game {
 					return;
 				}
 			}
+		for (int i = 0; i < informers_count; i++)
+			if (Informer.name.equals(name)) {
+				System.out.println("mafia tried to kill " + name);
+				if (!doctors_target.equals(name)) {
+					Informer.isAlive = false;
+					System.out.println(Informer.name + " was killed");
+					return;
+				}
+			}
 
 	}
 
 	public static void checkIfGameEnds() {
 		int v=getCount(villagers,villagers_count)+getCount(doctors,doctors_count)+getCount(detectives,detectives_count)+getCount(bulletproofs,bulletproofs_count);
+		if(informers_count>0)v++;
 		 int m = getCount(mafias,mafias_count)+getCount(godfathers,godfathers_count)+getCount(silencers,silencers_count);
 		 
 		 if(m>=v) {
@@ -705,6 +718,23 @@ public class game {
 					mostVoteName[0] = joker.name;
 				} else if (joker.votes == mostVote) {
 					mostVoteName[mostVoteSame] = joker.name;
+					mostVoteSame++;
+				}
+			}
+
+		for (int i = 0; i < informers_count; i++)
+			if (Informer.name.equals(name)) {
+				if (!Informer.isAlive) {
+					System.out.println("votee already dead");
+					return;
+				}
+				Informer.votes++;
+				if (Informer.votes > mostVote) {
+					mostVoteSame = 1;
+					mostVote = Informer.votes;
+					mostVoteName[0] = Informer.name;
+				} else if (Informer.votes == mostVote) {
+					mostVoteName[mostVoteSame] = Informer.name;
 					mostVoteSame++;
 				}
 			}
@@ -857,6 +887,24 @@ public class game {
 				return;
 			}
 
+		for (int i = 0; i < informers_count; i++)
+			if (Informer.name.equals(name)) {
+				if (!Informer.isAlive) {
+					System.out.println("votee already dead");
+					return;
+				}
+				Informer.votes++;
+				if (Informer.votes > mostVote) {
+					mostVoteSame = 1;
+					mostVote = Informer.votes;
+					mostVoteName[0] = Informer.name;
+				} else if (Informer.votes == mostVote) {
+					mostVoteName[mostVoteSame] = Informer.name;
+					mostVoteSame++;
+				}
+				return;
+			}
+		
 		System.out.println("user not joined");
 
 	}
@@ -914,6 +962,12 @@ public class game {
 			if (silencers[i].name.equals(name)) {
 				silencers[i].isAlive = false;
 				System.out.println(silencers[i].name + " died");
+				return;
+			}
+		for (int i = 0; i < informers_count; i++)
+			if (Informer.name.equals(name)) {
+				Informer.isAlive = false;
+				System.out.println(Informer.name + " died");
 				return;
 			}
 	}
