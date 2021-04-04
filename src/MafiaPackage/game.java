@@ -1,3 +1,11 @@
+
+/*
+ * 
+ * Mafia mini project by Ali Nour
+ *  ( Github repository link >>> https://github.com/ali3ds/mafia-mini-project )
+ */
+
+
 package MafiaPackage;
 
 import java.util.Arrays;
@@ -1150,3 +1158,6 @@ public class game {
 		
 	}
 }
+
+// Github repository link: 
+// https://github.com/ali3ds/mafia-mini-project
