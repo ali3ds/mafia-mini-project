@@ -1,7 +1,7 @@
 
 /*
  * 
- * Mafia mini project by Ali Nour
+ * Mafia mini project by Ali Nour ..
  *  ( Github repository link >>> https://github.com/ali3ds/mafia-mini-project )
  */
 
@@ -657,7 +657,7 @@ public class game {
 	public static void checkIfGameEnds() {
 		int v=getCount(villagers,villagers_count)+getCount(doctors,doctors_count)+getCount(detectives,detectives_count)+getCount(bulletproofs,bulletproofs_count);
 		if(informers_count>0)v++;
-		
+		//if(joker_count>0)v++;
 		 int m = getCount(mafias,mafias_count)+getCount(godfathers,godfathers_count)+getCount(silencers,silencers_count);
 		 
 		 if(m>=v) {
@@ -1035,6 +1035,7 @@ public class game {
 			if (Informer.name.equals(name)) {
 				Informer.isAlive = false;
 				System.out.println(Informer.name + " died");
+				inform();
 				return;
 			}
 	}
@@ -1057,7 +1058,7 @@ public class game {
 			mostVoteSame = 1;
 		}
 
-		checkIfGameEnds();
+	//	checkIfGameEnds();
 		
 		while(true) {
 
@@ -1108,12 +1109,16 @@ public class game {
 	}
 
 	public static void main(String[] args) {
-		String in;
-		in = input.next();
-		if (in.equals("create_game")) {
-			new_game();
-		} else {
-			System.out.println("no game created");
+		String in = "";
+		
+		while(!in.equals("create_game")) {
+
+			in = input.next();
+			if (in.equals("create_game")) {
+				new_game();
+				break;
+			} 
+			System.out.println("No game created");
 		}
 
 		while (true) {
